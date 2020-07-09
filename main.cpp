@@ -13,7 +13,8 @@ int main() {
     pfs::screen mainScreen;
 
     mainScreen.init();
-    mainScreen.draw();
+
+    mainScreen.update();
     while(true == gameLoop){
         gameLoop = mainScreen.processEvents();
     }

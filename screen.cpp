@@ -61,13 +61,30 @@ bool screen::init(){
     return true;
 }
 
-void screen::draw(){
+void screen::update(){
     SDL_UpdateTexture(windowTexture, NULL, buffer, SCREEN_WIDTH*sizeof(Uint32));
     SDL_RenderClear(windowRender);
     SDL_RenderCopy(windowRender, windowTexture, NULL, NULL);
     SDL_RenderPresent(windowRender);
 }
 
+bool screen::setPixelRGBA(int x, int y, Uint32 RGBA) {
+    if ((x < SCREEN_WIDTH) && (y < SCREEN_HEIGHT)) {
+        *(buffer + x + (y*SCREEN_WIDTH)) = RGBA;
+        return true;
+    } else {
+        return false;
+    }
+}
+bool screen::setPixelRGBA(int x,int y, Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha){
+    Uint32 RGBA = ((Uint32)red << 24 ) | ((Uint32)green << 16 ) | ((Uint32)blue << 8 ) | ((Uint32)alpha);
+    if ((x < SCREEN_WIDTH) && (y < SCREEN_HEIGHT)) {
+            *(buffer + x + (y*SCREEN_WIDTH)) = RGBA;
+            return true;
+        } else {
+            return false;
+        }
+}
 
 bool screen::processEvents(){
     SDL_Event event;

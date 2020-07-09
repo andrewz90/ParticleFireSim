@@ -35,7 +35,9 @@ public:
 
     /* methods */
     bool init();
-    void draw();
+    void update();
+    bool setPixelRGBA(int x,int y, Uint32 RGBA);
+    bool setPixelRGBA(int x,int y, Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
     bool processEvents();
     void close();
 
